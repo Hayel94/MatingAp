@@ -1,0 +1,20 @@
+<div class="rtl container mt-5">
+  <div *ngIf="!registerMode" style="text-align:center">
+    <h2 style="font-family:JF-Flat-Regular ;">marige is the best thing for yoy</h2>
+    <h5 style="font-family:JF-Flat-Regular ;">marige is the best thing for you ... dont make your dream down try and
+      fight</h5>
+    <div class="text-ceter">
+      <button (click)="registerToggle()" style="font-family:JF-Flat-Regular;" class="btn btn-secondary btn-lg">اشترك
+        معنا</button>
+    </div>
+  </div>
+
+  <div *ngIf="registerMode" class="container">
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <app-register  (cancelRegister)="cancelRegister($event)"></app-register>
+      </div>
+    </div>
+  </div>
+</div>
+

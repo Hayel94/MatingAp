@@ -1,0 +1,28 @@
+<form #registerForm="ngForm" (ngSubmit)="register()" class="rtl">
+
+  <h4 class="text-center text-dark" style="font-weight:bold;font-family:JF-Flat-Regular;">your parint awiting you</h4>
+  <hr>
+
+  <div class="form-group">
+    <input name="username"[(ngModel)]="model.username" type="text" class="form-control" placeholder="Username">
+  </div>
+
+  <div class="form-group">
+    <input name="password" [(ngModel)]="model.password" type="password" class="form-control" placeholder="Password">
+  </div>
+
+  <div class="form-group text-center">
+    <button
+     style="font-weight:bold;font-family:JF-Flat-Regular;"
+     class="btn btn-secondary btn-lg"
+      type="submit">Sign in
+    </button>
+    <button
+    (click)="cancel()"
+    style="font-weight:bold;font-family:JF-Flat-Regular;"
+     class=" btn btn-secondary btn-lg ml-2"
+      type="button">Not Now
+    </button>
+  </div>
+
+</form>
