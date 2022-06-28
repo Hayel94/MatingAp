@@ -40,26 +40,28 @@ namespace MatingApp.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserLoginDto userLoginDto)
         {
-            var userFromRepo = await _repo.Login(userLoginDto.username.ToLower(), userLoginDto.password);
-            if (userFromRepo == null) return Unauthorized();
-            var claims = new[]{
+           
+                var userFromRepo = await _repo.Login(userLoginDto.username.ToLower(), userLoginDto.password);
+                if (userFromRepo == null) return Unauthorized();
+                var claims = new[]{
              new Claim(ClaimTypes.NameIdentifier,userFromRepo.Id.ToString()),
              new Claim(ClaimTypes.Name,userFromRepo.Username)
             };
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value));
-            var creds = new SigningCredentials(key,SecurityAlgorithms.HmacSha512);
-            var tokenDescripror = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(1),
-                SigningCredentials = creds
-            };
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var token=tokenHandler.CreateToken(tokenDescripror);
-            return Ok(new
-            {
-                token=tokenHandler.WriteToken(token)
-            });
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value));
+                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
+                var tokenDescripror = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(claims),
+                    Expires = DateTime.Now.AddDays(1),
+                    SigningCredentials = creds
+                };
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var token = tokenHandler.CreateToken(tokenDescripror);
+                return Ok(new
+                {
+                    token = tokenHandler.WriteToken(token)
+                });          
+
         }
         // GET: api/<AuthController>
         [HttpGet]

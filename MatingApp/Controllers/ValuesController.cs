@@ -1,4 +1,5 @@
 ﻿using MatingApp.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MatingApp.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
@@ -16,7 +18,7 @@ namespace MatingApp.Controllers
         {
             _context = context;
         }
-
+        [AllowAnonymous]
         // GET: api/<ValuesController>
         [HttpGet]
         public async Task<IActionResult> GetValue()
@@ -24,7 +26,7 @@ namespace MatingApp.Controllers
             var values =await _context.Values.ToListAsync();
             return Ok(values);
         }
-
+        [AllowAnonymous]
         // GET api/<ValuesController>/5
         [HttpGet("{id}")]
         public async Task< IActionResult> GetValue(int id)

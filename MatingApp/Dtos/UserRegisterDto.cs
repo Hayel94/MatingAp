@@ -7,6 +7,7 @@ namespace MatingApp.Dtos
         [Required]
         public string username { get; set; }
         [StringLength(100,MinimumLength =4,ErrorMessage ="the passwor must be more then 4 values and less then 8 values")]
+        [Required]
         public string password { get; set; }
     }
 }
